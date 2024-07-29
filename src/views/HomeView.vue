@@ -4,7 +4,10 @@ export default{
   data() {
     return {
       restaurantes: [],
+      restauranteSelecionado: null,
       buscar: '',
+      carregando: false,
+      showModal: false
     };
   },
   mounted() {
@@ -12,16 +15,20 @@ export default{
   },
   methods: {
     fetchRestaurantes() {
+      this.carregando = true;
       this.axios.get(`${import.meta.env.VITE_API_URL}/Restaurante`)
           .then((response) => {
             this.restaurantes = response.data;
           })
           .catch((error) => {
             console.error('Erro ao buscar restaurantes:', error);
+          })
+          .finally(() => {
+            this.carregando = false;
           });
     },
-    abrirModal(){
-      alert("aaaaa");
+    abrirModal(restaurante){
+     console.log(restaurante.horario_funcionamento);
     }
   }
 }
@@ -32,9 +39,15 @@ export default{
   <div>
     <div class="card border-gray-200">
       <div class="col-12">
+
         <InputText class="col-12" v-model="buscar" placeholder="Buscar"/>
       </div>
     </div>
+
+    <div v-if="carregando" class="card flex justify-center">
+      <Progressspinner />
+    </div>
+
     <div class="grid m-1">
       <div v-for="restaurante in restaurantes" :key="restaurante.id" class="col flex-grow-0 min-h-full">
         <Card class="min-h-full restaurante-card"   style="width: 15rem; overflow: hidden" @click="abrirModal(restaurante)" >
