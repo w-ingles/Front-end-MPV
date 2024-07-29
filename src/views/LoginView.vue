@@ -1,4 +1,5 @@
 <template>
+  <Toast/>
   <div class="login-body">
     <div class="login-panel"></div>
 
@@ -7,7 +8,7 @@
 
       <img src="../../public/img/comerbemlogo.png" />
       <h1><span>LOGIN</span>COMER BEM</h1>
-      <p>Welcome, please use the form to sign-in.</p>
+      <p>Maior portal de restaurantes</p>
 
       <div class="login-input-wrapper">
         <InputText placeholder="Email" />
@@ -24,10 +25,15 @@
   </div>
 </template>
 
-<script >
-import Button from 'primevue/button';
+<script>
 export default {
-  name: 'LoginView'
+  name: 'LoginView',
+  methods: {
+    goDashboard() {
+      this.$toast.add({ severity: 'success', summary: 'Success Message', detail: 'Message Content', life: 3000 });
+      // this.$router.push({ path: '/' });
+    },
+  },
 }
 </script>
 

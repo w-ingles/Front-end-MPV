@@ -7,7 +7,7 @@ import axios from 'axios'
 import router from './router'
 import PrimeVue from 'primevue/config';
 import ToastService from 'primevue/toastservice';
-
+import Toast from 'primevue/toast'
 import InputText from 'primevue/inputtext';
 import Button from 'primevue/button';
 import Card from 'primevue/card';
@@ -26,5 +26,6 @@ app.use(PrimeVue, {theme: {
 app.use(ToastService);
 app.component('Button', Button);
 app.component('Card', Card);
+app.component('Toast', Toast);
 app.component('InputText', InputText);
 app.mount('#app')

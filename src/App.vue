@@ -1,4 +1,5 @@
 <template>
+  <Toast/>
   <RouterView />
 </template>
 
@@ -14,3 +15,5 @@
   font-family: 'Electroluxsans', sans-serif;
 }
 </style>
+<script >
+</script>
