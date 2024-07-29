@@ -1,16 +1,11 @@
 <template>
-aaa
+
 </template>
 
 <script >
+import Button from 'primevue/button';
 export default {
-  name: 'LoginView',
-  props: {
-    msg: String
-  },
-  mounted() {
-    alert(import.meta.env.VITE_API_URL)
-  },
+  name: 'LoginView'
 }
 </script>
 
