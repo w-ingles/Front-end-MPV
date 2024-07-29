@@ -11,16 +11,16 @@
       <p>Maior portal de restaurantes</p>
 
       <div class="login-input-wrapper">
-        <InputText placeholder="Email" />
+        <InputText v-model="email" placeholder="Email"/>
         <i class="pi pi-user"></i>
       </div>
 
       <div class="login-input-wrapper">
-        <InputText type="password" placeholder="Senha" />
+        <InputText v-model="password" type="password" placeholder="Senha" />
         <i class="pi pi-lock"></i>
       </div>
 
-      <Button label="Entrar" @click="goDashboard" />
+      <Button label="Entrar" @click="login" />
     </div>
   </div>
 </template>
@@ -28,10 +28,39 @@
 <script>
 export default {
   name: 'LoginView',
+  data() {
+    return {
+      email: 'fred@graodireto.com.br',
+      password: '123Fred',
+    };
+  },
   methods: {
-    goDashboard() {
-      this.$toast.add({ severity: 'success', summary: 'Success Message', detail: 'Message Content', life: 3000 });
-      // this.$router.push({ path: '/' });
+    login() {
+      const loginData = {
+        email: this.email,
+        password: this.password,
+      };
+      // Acesse a variável de ambiente
+      console.log(loginData);
+
+
+      this.axios.post(`${import.meta.env.VITE_API_URL}/auth/login`,loginData)
+          .then((response) => {
+            if (response.data && response.data.access_token) {
+              // Armazene o token de acesso no local storage
+              localStorage.setItem('access_token', response.data.access_token);
+
+              // Defina o token como padrão nos headers para futuras requisições
+              //this.axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.access_token}`;
+
+              this.$router.push('/home');
+            } else {
+              this.$toast.add({ severity: 'warn', summary: 'Falha no login', detail: 'E-mail ou senha incorretos', life: 3000 });
+            }
+          })
+          .catch((error) => {
+            this.$toast.add({ severity: 'error', summary: 'Falha no login', detail: 'E-mail ou Senhas incorretas.', life: 3000 });
+          });
     },
   },
 }
