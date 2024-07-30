@@ -7,7 +7,8 @@ export default{
       restauranteSelecionado: null,
       buscar: '',
       carregando: false,
-      showModal: false
+      showModal: false,
+      visible: false
     };
   },
   mounted() {
@@ -37,12 +38,20 @@ export default{
 
 <template>
   <div>
-    <div class="card border-gray-200">
-      <div class="col-12">
 
-        <InputText class="col-12" v-model="buscar" placeholder="Buscar"/>
+    <div class="flex justify-content-center flex-wrap">
+      <img src="../../public/img/comerbemlogo.png" style="width: 15%"/>
+    </div>
+
+
+
+    <div class="field grid ml-3 ">
+      <Button class="btninto" icon="pi pi-bars" @click="visible = true" />
+      <div class="col-10">
+        <InputText   v-model="buscar" placeholder="Buscar"/>
       </div>
     </div>
+
 
     <div v-if="carregando" class="card flex justify-center">
       <Progressspinner />
@@ -70,6 +79,23 @@ export default{
         </Card>
       </div>
     </div>
+
+
+    <Drawer v-model:visible="visible">
+      <template #header>
+        <div class="flex items-center gap-2">
+          <Avatar image="/images/avatar/amyelsner.png" shape="circle" />
+          <span class="font-bold">Amy Elsner</span>
+        </div>
+      </template>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      <template #footer>
+        <div class="flex items-center gap-2">
+          <Button label="Account" icon="pi pi-user" class="flex-auto" outlined></Button>
+          <Button label="Logout" icon="pi pi-sign-out" class="flex-auto" severity="danger" text></Button>
+        </div>
+      </template>
+    </Drawer>
   </div>
 </template>
 <style scoped>
@@ -83,5 +109,10 @@ img{
 .restaurante-card {
   transition: transform 0.3s ease;
   cursor: pointer;
+}
+.btninto{
+  background-color: #eca457;
+  border-color: #eca457;
+  color: black
 }
 </style>

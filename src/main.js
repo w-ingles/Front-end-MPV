@@ -13,8 +13,10 @@ import Button from 'primevue/button';
 import Card from 'primevue/card';
 import Rating from 'primevue/rating';
 import Progressspinner from 'primevue/progressspinner';
+import Drawer from 'primevue/drawer';
 
 
+import 'primeicons/primeicons.css'
 import 'primeflex/primeflex.css';
 import Aura from '@primevue/themes/aura';
 
@@ -33,5 +35,6 @@ app.component('Toast', Toast);
 app.component('InputText', InputText);
 app.component('Rating', Rating);
 app.component('Progressspinner', Progressspinner);
+app.component('Drawer', Drawer);
 
 app.mount('#app')
