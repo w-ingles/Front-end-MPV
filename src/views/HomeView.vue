@@ -5,7 +5,7 @@ export default{
     return {
       restaurantes: [],
       restauranteSelecionado: null,
-      buscar: '',
+      buscar: "",
       carregando: false,
       showModal: false,
       visible: false
@@ -17,7 +17,12 @@ export default{
   methods: {
     fetchRestaurantes() {
       this.carregando = true;
-      this.axios.get(`${import.meta.env.VITE_API_URL}/Restaurante`)
+
+      const params = {
+        filtro: this.buscar
+      };
+
+      this.axios.get(`${import.meta.env.VITE_API_URL}/Restaurante`, { params })
           .then((response) => {
             this.restaurantes = response.data;
           })
@@ -48,7 +53,9 @@ export default{
     <div class="field grid ml-3 ">
       <Button class="btninto" icon="pi pi-bars" @click="visible = true" />
       <div class="col-10">
-        <InputText   v-model="buscar" placeholder="Buscar"/>
+        <InputText  class="mr-2"  v-model="buscar.filtro" placeholder="Buscar"/>
+        <Tag class="mr-1" severity="secondary" value="Secondary" rounded></Tag>
+        <Tag severity="secondary" value="Secondary" rounded></Tag>
       </div>
     </div>
 
