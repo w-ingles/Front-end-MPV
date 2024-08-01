@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import LoginView from '../views/LoginView.vue'
+import RestauranteView from '../views/RestauranteView.vue'
 import axios from "axios";
 
 const router = createRouter({
@@ -22,6 +23,20 @@ const router = createRouter({
       path: '/home',
       name: 'home',
       component: HomeView,
+      beforeEnter: async (to, from, next) => {
+
+        if (await isAuthenticated()) {
+          next();
+        } else {
+          next('/login'); // Redireciona para a página de login se não estiver autenticado
+        }
+      }
+    },
+    {
+      path: '/restaurante/:id',
+      name: 'restaurante',
+      component: RestauranteView,
+      props: true,
       beforeEnter: async (to, from, next) => {
 
         if (await isAuthenticated()) {
