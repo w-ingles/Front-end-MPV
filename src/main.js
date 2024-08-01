@@ -15,6 +15,7 @@ import Rating from 'primevue/rating';
 import Progressspinner from 'primevue/progressspinner';
 import Drawer from 'primevue/drawer';
 import Tag from 'primevue/tag';
+import Carousel from "primevue/carousel";
 
 
 import 'primeicons/primeicons.css'
@@ -37,6 +38,8 @@ app.component('InputText', InputText);
 app.component('Rating', Rating);
 app.component('Progressspinner', Progressspinner);
 app.component('Drawer', Drawer);
-app.component('Tag', Tag)
+app.component('Tag', Tag);
+app.component('Carousel', Carousel);
+
 
 app.mount('#app')

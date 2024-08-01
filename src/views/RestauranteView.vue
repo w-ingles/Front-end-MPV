@@ -5,14 +5,16 @@ export default{
   data() {
     return {
       restaurante: null,
+      carregando: false,
     };
   },
   mounted() {
-    alert("aaa")
     this.fetchRestaurantes();
   },
   methods: {
     async fetchRestaurantes() {
+
+      this.carregando = true;
 
       await this.axios.get(`${import.meta.env.VITE_API_URL}/api/Restaurante/${this.id}`)
           .then((response) => {
@@ -22,24 +24,61 @@ export default{
             console.error('Erro ao buscar restaurantes:', error);
           })
           .finally(() => {
-            // this.carregando = false;
+            this.carregando = false;
           });
     },
+    voltar() {
+      this.$router.go(-1);
+    },
+  },
 
-  }
 }
 </script>
 
 <template>
-  aaa
-<!--  <div>-->
-<!--    <h1>{{ restaurante.nome }}</h1>-->
-<!--    <img :src=" 'http://127.0.0.1:8000' + restaurante.patch_foto || '../../public/img/imgfundologin.jpg'" />-->
-<!--    <p>{{ restaurante.descricao }}</p>-->
-<!--    <p>{{ restaurante.endereco }}</p>-->
-<!--    <p>{{ restaurante.horario_funcionamento }}</p>-->
-<!--    <Rating v-model="restaurante.avaliacao" readonly />-->
-<!--  </div>-->
+  <div v-if="carregando" class="card flex justify-center">
+    <Progressspinner />
+  </div>
+  <div v-if="restaurante">
+    <Button icon="pi pi-angle-left" severity="success" aria-label="Search" @click="voltar"/>
+    <div class="flex justify-content-center flex-wrap mt-3">
+
+      <img class="border-circle w-1 pt-0" :src="'http://127.0.0.1:8000' + restaurante.patch_foto || '../../public/img/imgfundologin.jpg'" />
+    </div>
+
+    <div class="grid">
+      <div class="col-1">
+
+      </div>
+
+    </div>
+
+    <h2>Pratos</h2>
+    <Carousel :value="restaurante.cardapios" :numVisible="4" :numScroll="4">
+
+      <template #item="slotProps">
+        <div class="border border-surface-200 dark:border-surface-700 rounded m-2 p-4">
+          <div class="mb-4">
+            <div class="relative mx-auto">
+              <img :src="'http://127.0.0.1:8000' + slotProps.data.patch_foto" :alt="slotProps.data.nome" class="w-5 rounded" />
+            </div>
+          </div>
+          <div class="mb-4 font-medium">{{ slotProps.data.nome }}</div>
+          <div class="mb-4 font-medium">{{ slotProps.data.descricao }}</div>
+          <div class="flex justify-between items-center">
+            <div class="mt-0 font-semibold text-xl">{{ slotProps.data.preco }}</div>
+            <div class="mt-0 font-semibold text-xl">R$</div>
+            <span>
+              <Button icon="pi pi-heart" severity="secondary" outlined />
+              <Button icon="pi pi-shopping-cart" class="ml-2" />
+            </span>
+          </div>
+        </div>
+      </template>
+    </Carousel>
+
+  </div>
+
 </template>
 
 <style scoped>
