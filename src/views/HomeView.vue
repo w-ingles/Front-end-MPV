@@ -81,7 +81,10 @@ export default{
     </div>
 
     <div class="grid m-1">
-      <div v-for="restaurante in restaurantes" :key="restaurante.id" class="col flex-grow-0 min-h-full">
+      <div v-if="restaurantes.length === 0">
+        <p>Nenhum restaurante ou prato encontrado</p>
+      </div>
+      <div  v-else v-for="restaurante in restaurantes" :key="restaurante.id" class="col flex-grow-0 min-h-full">
         <Card class="min-h-full restaurante-card"   style="width: 15rem; overflow: hidden" @click="abrirModal(restaurante)" >
           <template #header>
             <img :src=" 'http://127.0.0.1:8000' + restaurante.patch_foto || '../../public/img/imgfundologin.jpg'" />
