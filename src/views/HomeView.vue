@@ -8,33 +8,49 @@ export default{
       buscar: "",
       carregando: false,
       showModal: false,
-      visible: false
+      visible: false,
+      timeout: null
     };
   },
   mounted() {
     this.fetchRestaurantes();
   },
   methods: {
-    fetchRestaurantes() {
-      this.carregando = true;
+     async fetchRestaurantes() {
+       this.carregando = true;
 
-      const params = {
-        filtro: this.buscar
-      };
+       const params = {
+         filtro: this.buscar
+       };
 
-      this.axios.get(`${import.meta.env.VITE_API_URL}/Restaurante`, { params })
-          .then((response) => {
-            this.restaurantes = response.data;
-          })
-          .catch((error) => {
-            console.error('Erro ao buscar restaurantes:', error);
-          })
-          .finally(() => {
-            this.carregando = false;
-          });
-    },
+       await this.axios.get(`${import.meta.env.VITE_API_URL}/Restaurante`, {params})
+           .then((response) => {
+             this.restaurantes = response.data;
+           })
+           .catch((error) => {
+             console.error('Erro ao buscar restaurantes:', error);
+           })
+           .finally(() => {
+             this.carregando = false;
+           });
+     },
     abrirModal(restaurante){
      console.log(restaurante.horario_funcionamento);
+    }
+  },
+  watch:{
+    buscar: {
+      handler() {
+        if (this.timeout) {
+          clearTimeout(this.timeout);
+        }
+
+        this.timeout = setTimeout(() => {
+
+          this.fetchRestaurantes();
+        }, 500);
+      },
+      immediate: true
     }
   }
 }
@@ -53,7 +69,7 @@ export default{
     <div class="field grid ml-3 ">
       <Button class="btninto" icon="pi pi-bars" @click="visible = true" />
       <div class="col-10">
-        <InputText  class="mr-2"  v-model="buscar.filtro" placeholder="Buscar"/>
+        <InputText  class="mr-2"  v-model="buscar" placeholder="Buscar"/>
         <Tag class="mr-1" severity="secondary" value="Secondary" rounded></Tag>
         <Tag severity="secondary" value="Secondary" rounded></Tag>
       </div>
