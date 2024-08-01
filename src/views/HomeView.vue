@@ -16,6 +16,10 @@ export default{
     this.fetchRestaurantes();
   },
   methods: {
+    abrirDetalhes(restaurante) {
+      this.$router.push(`/restaurante/${restaurante.id}`);
+    },
+
      async fetchRestaurantes() {
        this.carregando = true;
 
