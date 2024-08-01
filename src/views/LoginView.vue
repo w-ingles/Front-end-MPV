@@ -44,7 +44,7 @@ export default {
       console.log(loginData);
 
 
-      this.axios.post(`${import.meta.env.VITE_API_URL}/auth/login`,loginData)
+      this.axios.post(`${import.meta.env.VITE_API_URL}/api/auth/login`,loginData)
           .then((response) => {
             if (response.data && response.data.access_token) {
               // Armazene o token de acesso no local storage

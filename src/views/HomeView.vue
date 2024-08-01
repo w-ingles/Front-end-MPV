@@ -23,7 +23,7 @@ export default{
          filtro: this.buscar
        };
 
-       await this.axios.get(`${import.meta.env.VITE_API_URL}/Restaurante`, {params})
+       await this.axios.get(`${import.meta.env.VITE_API_URL}/api/Restaurante`, {params})
            .then((response) => {
              this.restaurantes = response.data;
            })
@@ -84,7 +84,7 @@ export default{
       <div v-for="restaurante in restaurantes" :key="restaurante.id" class="col flex-grow-0 min-h-full">
         <Card class="min-h-full restaurante-card"   style="width: 15rem; overflow: hidden" @click="abrirModal(restaurante)" >
           <template #header>
-            <img :src="restaurante.imagem || '../../public/img/imgfundologin.jpg'" />
+            <img :src=" 'http://127.0.0.1:8000' + restaurante.patch_foto || '../../public/img/imgfundologin.jpg'" />
           </template>
           <template #title>{{ restaurante.nome }}</template>
           <template #subtitle>{{ restaurante.descricao }}</template>
