@@ -38,8 +38,9 @@ export default{
              this.carregando = false;
            });
      },
-    abrirModal(restaurante){
-     console.log(restaurante.horario_funcionamento);
+    logout(){
+      localStorage.removeItem('access_token');
+      router.push('/login');
     }
   },
   watch:{
@@ -89,15 +90,15 @@ export default{
         <p>Nenhum restaurante ou prato encontrado</p>
       </div>
       <div  v-else v-for="restaurante in restaurantes" :key="restaurante.id" class="col flex-grow-0 min-h-full">
-        <Card class="min-h-full restaurante-card"   style="width: 15rem; overflow: hidden" @click="abrirDetalhes(restaurante)" >
+        <Card class="min-h-full restaurante-card"   style="width: 10rem; overflow: hidden" @click="abrirDetalhes(restaurante)" >
           <template #header>
             <img :src=" 'http://127.0.0.1:8000' + restaurante.patch_foto || '../../public/img/imgfundologin.jpg'" />
           </template>
           <template #title>{{ restaurante.nome }}</template>
           <template #subtitle>{{ restaurante.descricao }}</template>
           <template #content>
-            <p class="m-0">{{ restaurante.endereco }}</p>
-            <p class="m-0">{{ restaurante.horario_funcionamento }}</p>
+<!--            <p class="m-0">{{ restaurante.endereco }}</p>-->
+<!--            <p class="m-0">{{ restaurante.horario_funcionamento }}</p>-->
           </template>
           <template #footer>
             <div class="flex gap-4 mt-1 justify-end">
@@ -115,14 +116,13 @@ export default{
       <template #header>
         <div class="flex items-center gap-2">
           <Avatar image="/images/avatar/amyelsner.png" shape="circle" />
-          <span class="font-bold">Amy Elsner</span>
+          <span class="font-bold">Fred</span>
         </div>
       </template>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      <p>Bem-vindo ao Comer Bem, o portal definitivo para os amantes da boa comida! Nossa missão é conectar você aos melhores restaurantes da sua região, oferecendo uma experiência gastronômica inigualável. Navegue por uma vasta seleção de estabelecimentos que vão desde o requinte da alta gastronomia até o aconchego da comida caseira.</p>
       <template #footer>
         <div class="flex items-center gap-2">
-          <Button label="Account" icon="pi pi-user" class="flex-auto" outlined></Button>
-          <Button label="Logout" icon="pi pi-sign-out" class="flex-auto" severity="danger" text></Button>
+          <Button label="Logout" icon="pi pi-sign-out" class="flex-auto" severity="danger" @click="logout"  text></Button>
         </div>
       </template>
     </Drawer>
