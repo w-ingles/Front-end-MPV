@@ -5,7 +5,7 @@ export default{
     return {
       restaurantes: [],
       restauranteSelecionado: null,
-      buscar: "",
+      buscar: null,
       carregando: false,
       showModal: false,
       visible: false,
@@ -40,20 +40,22 @@ export default{
      },
     logout(){
       localStorage.removeItem('access_token');
-      router.push('/login');
+      this.$router.push('/login');
     }
   },
   watch:{
     buscar: {
-      handler() {
-        if (this.timeout) {
-          clearTimeout(this.timeout);
+      handler(newVal) {
+        if (newVal !== '' && newVal !== null) {  // Verifica se o valor de 'buscar' é diferente de vazio
+
+          if (this.timeout) {
+            clearTimeout(this.timeout);
+          }
+
+          this.timeout = setTimeout(() => {
+            this.fetchRestaurantes();
+          }, 500);
         }
-
-        this.timeout = setTimeout(() => {
-
-          this.fetchRestaurantes();
-        }, 500);
       },
       immediate: true
     }
@@ -115,7 +117,6 @@ export default{
     <Drawer v-model:visible="visible">
       <template #header>
         <div class="flex items-center gap-2">
-          <Avatar image="/images/avatar/amyelsner.png" shape="circle" />
           <span class="font-bold">Fred</span>
         </div>
       </template>
@@ -144,5 +145,8 @@ img{
   background-color: #eca457;
   border-color: #eca457;
   color: black
+}
+.p-icon p-rating-icon p-rating-on-icon{
+  color: #eca457 !important;
 }
 </style>

@@ -40,21 +40,20 @@ export default{
     <Progressspinner />
   </div>
   <div v-if="restaurante">
-    <Button icon="pi pi-angle-left" severity="success" aria-label="Search" @click="voltar"/>
+    <Button class="btninto" icon="pi pi-angle-left"  severity="success" aria-label="Search" @click="voltar"/>
     <div class="flex justify-content-center flex-wrap mt-3">
 
       <img class="border-circle w-1 pt-0" :src="'http://127.0.0.1:8000' + restaurante.patch_foto || '../../public/img/imgfundologin.jpg'" />
 
     </div>
     <div class="flex justify-content-center">
-      <div class="flex ">
+      <h2 class="mr-2">{{ restaurante.nome }}</h2>
+    </div>
+    <div class="flex justify-content-center">
+      <p class="">{{ restaurante.endereco }},</p>
+      <p class="">{{ restaurante.telefone }},</p>
+      <p class="">{{ restaurante.horario_funcionamento }}</p>
 
-        <p class="mr-2">{{ restaurante.nome }},</p>
-        <p class="">{{ restaurante.endereco }},</p>
-        <p class="">{{ restaurante.telefone }},</p>
-        <p class="">{{ restaurante.horario_funcionamento }}</p>
-
-      </div>
     </div>
 
 
@@ -82,10 +81,10 @@ export default{
             <div class="mt-0 font-semibold text-xl">R$</div>
             <div class="mt-0 mr-8 font-semibold text-xl">{{ slotProps.data.preco }}</div>
 
-            <span>
+<!--            <span>-->
 
-                    <Button icon="pi pi-shopping-cart" class="ml-2" outlined/>
-                </span>
+<!--                    <Button icon="pi pi-shopping-cart" class="ml-2" outlined/>-->
+<!--                </span>-->
           </div>
         </div>
       </template>
@@ -96,5 +95,9 @@ export default{
 </template>
 
 <style scoped>
-
+.btninto{
+  background-color: #eca457;
+  border-color: #eca457;
+  color: black
+}
 </style>
