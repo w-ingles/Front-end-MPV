@@ -16,6 +16,8 @@ import Progressspinner from 'primevue/progressspinner';
 import Drawer from 'primevue/drawer';
 import Tag from 'primevue/tag';
 import Carousel from "primevue/carousel";
+import Image from 'primevue/image';
+
 
 
 import 'primeicons/primeicons.css'
@@ -41,6 +43,7 @@ app.component('Progressspinner', Progressspinner);
 app.component('Drawer', Drawer);
 app.component('Tag', Tag);
 app.component('Carousel', Carousel);
+app.component('Image', Image);
 
 
 app.mount('#app')

@@ -45,6 +45,7 @@ export default{
 
       <img class="border-circle w-1 pt-0" :src="'http://127.0.0.1:8000' + restaurante.patch_foto || '../../public/img/imgfundologin.jpg'" />
 
+
     </div>
     <div class="flex justify-content-center">
       <h2 class="mr-2">{{ restaurante.nome }}</h2>
@@ -69,9 +70,7 @@ export default{
         <div class="border-1 border-surface-200 dark:border-surface-700  m-2 p-4">
           <div class="mb-4">
             <div class="relative mx-auto">
-              <img :src="'http://127.0.0.1:8000' + slotProps.data.patch_foto" :alt="slotProps.data.nome" class="w-10" />
-
-
+              <Image :src="'http://127.0.0.1:8000' + slotProps.data.patch_foto"  alt="Image" width="250" preview />
             </div>
           </div>
           <div class="mb-4 font-medium">{{ slotProps.data.nome }}</div>

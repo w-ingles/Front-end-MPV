@@ -77,8 +77,6 @@ export default{
       <Button class="btninto" icon="pi pi-bars" @click="visible = true" />
       <div class="col-10">
         <InputText  class="mr-2"  v-model="buscar" placeholder="Buscar"/>
-        <Tag class="mr-1" severity="secondary" value="Secondary" rounded></Tag>
-        <Tag severity="secondary" value="Secondary" rounded></Tag>
       </div>
     </div>
 
